@@ -1,0 +1,484 @@
+/* ==========================================================================
+   1. GLOBAL & RESET STYLES
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  justify-content: center; /* Horizontally centers content */
+  align-items: center;     /* Vertically centers content */
+  min-height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Background Image Container */
+.bg-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('Images/background.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   2. LOCK SCREEN (PASSCODE) STYLES
+   ========================================================================== */
+#lock-screen {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 360px;
+  padding: 20px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.lock-title {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.dots-container {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.dot {
+  width: 14px;
+  height: 14px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.dot.filled {
+  background-color: #fff;
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+  justify-items: center;
+}
+
+.key {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: none;
+  color: #fff;
+  font-size: 1.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  user-select: none;
+}
+
+.key:active {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.error-msg {
+  color: #ff6b6b;
+  margin-top: 15px;
+  font-size: 0.9rem;
+  height: 20px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+
+@keyframes bounceIn {
+  0% { transform: translate(-50%, -50%) scale(0); }
+  70% { transform: translate(-50%, -50%) scale(1.1); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* ==========================================================================
+   3. MAIN CONTENT MODAL (UNLOCKED SCREEN)
+   ========================================================================== */
+#main-content {
+  position: relative;
+  z-index: 2;
+  display: none; /* Controlled via JS when passcode is correct */
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  max-width: 600px;
+  height: 85vh;
+  margin: 0 auto; /* Keeps card horizontally centered */
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Tab Navigation Header */
+.nav-tabs {
+  display: flex;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 15px 5px;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  transition: color 0.3s, border-bottom 0.3s;
+}
+
+.tab-btn.active {
+  color: #fff;
+  border-bottom: 3px solid #ff4b72;
+}
+
+/* Active Tab Body Wrapper */
+.tab-container {
+  flex: 1;
+  width: 100%;
+  padding: 20px 25px; /* 20px top/bottom, 25px left/right padding */
+  overflow-y: auto;
+  box-sizing: border-box; /* Ensures padding stays INSIDE the container width */
+}
+
+.tab-content {
+  display: none;
+  animation: fadeIn 0.4s ease;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   4. INDIVIDUAL TAB CONTENT STYLES
+   ========================================================================== */
+
+/* TAB 1: LETTER STYLES */
+.letter-container {
+  max-height: 68vh;
+  overflow-y: auto;
+  padding: 10px 25px 20px 25px; /* Adds 25px room on left/right away from edges */
+  box-sizing: border-box;
+}
+
+.letter-container h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 25px; /* Creates the gap below "Dear Etaash..." */
+  color: #fff;
+}
+
+.letter-text, 
+.letter-body p {
+  line-height: 1.8;
+  font-size: 1.05rem;
+  color: #eaeaea;
+  margin-bottom: 1.2rem;
+  white-space: pre-line;
+}
+
+/* TAB 2: PHOTO GALLERY STYLES */
+.photo-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.photo-subtitle {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 5px;
+}
+
+.photo-grid {
+  display: grid;
+  /* Forces 3 equal columns that stretch to fill 100% of the container */
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 12px;
+  width: 100%;
+  padding-bottom: 20px;
+}
+
+.photo-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  width: 100%; /* Ensures card stretches to fill its 1/3 column */
+}
+
+.photo-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(255, 75, 114, 0.3);
+}
+
+.photo-card img {
+  width: 100%;
+  height: 130px; /* Proportionate height for 3-column layout */
+  object-fit: cover;
+  display: block;
+}
+
+.photo-caption {
+  padding: 6px 4px;
+  font-size: 0.75rem;
+  text-align: center;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.6);
+  font-weight: 500;
+}
+
+/* Fallback for smaller mobile screens so 3 columns don't look squished */
+@media (max-width: 480px) {
+  .photo-grid {
+    gap: 8px;
+  }
+
+  .photo-card img {
+    height: 95px;
+  }
+
+  .photo-caption {
+    font-size: 0.65rem;
+    padding: 4px 2px;
+  }
+}
+
+/* ==========================================================================
+   SCROLL CONTAINERS FOR TAB 1 & TAB 2
+   ========================================================================== */
+
+/* 1. Letter Scroll Area */
+.letter-scroll-container {
+  max-height: 60vh;       /* Limits height so it fits in the card */
+  overflow-y: auto;        /* Enables vertical scrolling */
+  padding-right: 12px;     /* Leaves space for the scrollbar handle */
+}
+
+/* 2. Photo Scroll Area */
+.photo-scroll-container {
+  max-height: 55vh;       /* Limits height so grid scrolls smoothly */
+  overflow-y: auto;        /* Enables vertical scrolling */
+  padding-right: 8px;      /* Prevents photos from overlapping scrollbar */
+}
+
+/* ==========================================================================
+   CUSTOM STYLED SCROLLBARS (WebKit: Chrome, Safari, Edge)
+   ========================================================================== */
+
+/* Scrollbar track width */
+.letter-scroll-container::-webkit-scrollbar,
+.photo-scroll-container::-webkit-scrollbar,
+.tab-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Scrollbar track background */
+.letter-scroll-container::-webkit-scrollbar-track,
+.photo-scroll-container::-webkit-scrollbar-track,
+.tab-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+/* Scrollbar thumb (the moveable handle) */
+.letter-scroll-container::-webkit-scrollbar-thumb,
+.photo-scroll-container::-webkit-scrollbar-thumb,
+.tab-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+/* Scrollbar thumb hover effect */
+.letter-scroll-container::-webkit-scrollbar-thumb:hover,
+.photo-scroll-container::-webkit-scrollbar-thumb:hover,
+.tab-container::-webkit-scrollbar-thumb:hover {
+  background: #ff4b72; /* Matches active tab highlight color */
+}
+
+/* Firefox standard scrollbar styling */
+.letter-scroll-container,
+.photo-scroll-container,
+.tab-container {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.05);
+}
+
+/* ==========================================================================
+   TAB 3: PLAYLIST & MUSIC CARDS STYLES
+   ========================================================================== */
+.playlist-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.playlist-subtitle {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 5px;
+}
+
+.playlist-scroll-container {
+  max-height: 60vh;
+  overflow-y: auto;
+  padding: 5px 15px 20px 5px;
+  box-sizing: border-box;
+}
+
+.playlist-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.music-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 14px;
+  padding: 12px;
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.music-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 75, 114, 0.25);
+}
+
+.music-img {
+  width: 90px;
+  height: 90px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.music-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+.music-tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #ff4b72;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.song-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.artist-name {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 8px;
+}
+
+/* Slim native audio player controls */
+.audio-player {
+  width: 100%;
+  height: 32px;
+  border-radius: 20px;
+  outline: none;
+}
+
+/* Custom scrollbar for Playlist */
+.playlist-scroll-container::-webkit-scrollbar {
+  width: 6px;
+}
+.playlist-scroll-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+.playlist-scroll-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+.playlist-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #ff4b72;
+}
+
+/* ==========================================================================
+   5. MOBILE RESPONSIVENESS
+   ========================================================================== */
+@media (max-width: 480px) {
+  #main-content {
+    width: 95%;
+    height: 90vh;
+  }
+
+  .photo-grid {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 10px;
+  }
+
+  .photo-card img {
+    height: 120px;
+  }
+
+  .tab-btn {
+    font-size: 0.8rem;
+    padding: 12px 3px;
+  }
+}

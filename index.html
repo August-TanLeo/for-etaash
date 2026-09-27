@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For My Favorite Person ❤️</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background Image -->
+  <div class="bg-image"></div>
+
+  <!-- Screen 1: iPhone Lock Screen Passcode -->
+  <div id="lock-screen">
+    <div class="lock-title">Enter Our Anniversary</div>
+    
+    <div class="dots-container">
+      <div class="dot" id="dot-0"></div>
+      <div class="dot" id="dot-1"></div>
+      <div class="dot" id="dot-2"></div>
+      <div class="dot" id="dot-3"></div>
+    </div>
+
+    <div class="keypad">
+      <button class="key" onclick="pressKey('1')">1</button>
+      <button class="key" onclick="pressKey('2')">2</button>
+      <button class="key" onclick="pressKey('3')">3</button>
+      <button class="key" onclick="pressKey('4')">4</button>
+      <button class="key" onclick="pressKey('5')">5</button>
+      <button class="key" onclick="pressKey('6')">6</button>
+      <button class="key" onclick="pressKey('7')">7</button>
+      <button class="key" onclick="pressKey('8')">8</button>
+      <button class="key" onclick="pressKey('9')">9</button>
+      <div></div>
+      <button class="key" onclick="pressKey('0')">0</button>
+      <div></div>
+    </div>
+
+    <div class="error-msg" id="error-msg"></div>
+  </div>
+
+  <!-- Screen 2: Unlocked Interface with Tabs -->
+  <div id="main-content">
+    <nav class="nav-tabs">
+      <button class="tab-btn active" onclick="switchTab(0)">Letter</button>
+      <button class="tab-btn" onclick="switchTab(1)">Pictures</button>
+      <button class="tab-btn" onclick="switchTab(2)">Playlist</button>
+    </nav>
+
+    <!-- Tab 1: Letter -->
+<div class="tab-content active" id="tab-0">
+    <div class="letter-scroll-container">
+         <div class="letter-container">
+    <h2>Dear Etaash...</h2>
+    <div class="letter-body">
+      <p>This is something I wanted to make for you from scratch, because what’s the point of being able to code if I can’t use it on you? I know nothing I say right now could completely make up for the way you felt yesterday, and I hate knowing that I made you feel alone when all I ever want is for you to feel like you have a home in me. I’ve been thinking a lot about everything you said, especially when you told me that you feel like I don’t love you anymore. Throughout these 14 months I always thought I love you just as much as before but i never thought about actually making you feel that love. Theres a difference between loving someone deeply and making sure they can feel it. I never want you to have to guess how I feel about you. I never want you to feel like you’re asking for too much by wanting little things from me, because those little things are exactly what make a relationship feel special. I might not always realise when I’m falling short, but I do hear you, and I do care.</p>
+      <p>Im sorry that i made you feel you couldnt talk to me about what hurts you because i got caught up in being defensive and forgot that being rigth isnt the point at all. Even if I genuinely see something differently, you’re still allowed to feel hurt by it, and I should have been listening to understand you rather than listening for something I could argue back against. I never want you to feel like you have to fight to be heard by me, especially when you’re trying to tell me something that’s hurting you. I should have been able to put my own feelings aside for a moment and look at things from your side, and I’m sorry that I didn’t. I’ve also been thinking about the times I’ve gotten upset with you for things that I’ve done myself. There have been moments where I’ve expected understanding, patience or reassurance from you while not always giving you that same understanding in return. That wasn’t fair to you, and I don’t want to sit here and make excuses for it. I think I’ve been selfish in our relationship in ways I didn’t fully recognise before. Not because I don’t care about you, but because sometimes I’ve been so focused on how something made me feel that I forgot to think about how it made you feel too. And I don’t want my love for you to only exist in my head- I want it to be something you can actually experience from me. I know I haven’t been exactly the same girlfriend I was when we first started dating. Maybe I’ve changed, and maybe there are parts of the way I’ve changed that I need to work on. But I don’t want to use that as an excuse or pretend that because I love you, everything I do automatically becomes okay. Loving someone also means being willing to look at yourself honestly, even when what you see isn’t particularly nice. I want to be able to hear you without immediately becoming defensive. I want to be able to apologise without feeling like I need to explain myself first. I want to hold myself to the same standards that I hold you to. And most importantly, I want you to feel safe telling me when something is wrong without worrying that I’m going to shut you down or turn it into an argument. You deserve to feel heard, understood and appreciated by the person you love, and I haven’t always given you that.</p>
+      <p>I know I’m going to get things wrong sometimes because I’m still learning, but I want you to see that I’m trying. I don’t want to become some completely different person for you; I just want to become a better version of myself, and a better girlfriend to you. Because you mean so much more to me than I think I manage to put into words. I meant it when I said I fall deeper in love with you every single day, and nothing about yesterday changes that. If anything, it made me realise how much I care about us and how much I want to protect what we have. I appreciate what all you’ve done for me and I meant it when I told avaneesh that you’re the best boyfriend ever and its not just because of how sweet you are to me its also because you notice the smallest things and never made me feel like i was wrong for feeling uncomfortable or hurt about something im sorry i didnt do the same for you. I want you to feel loved by me, not just know that I love you. And I hope this little website, this letter, and all the little things I do from here on out can remind you of that.</p>
+      <p>Love you always, Taneesha</p>
+      <!-- Add as many paragraphs as you like -->
+    </div>
+  </div>
+    </div>
+</div>
+
+      <!-- Tab 2: Pictures -->
+      <!-- Tab 2: Pictures -->
+<div class="tab-content" id="tab-1">
+  <div class="photo-header">
+    <h2>Our Favorite Memories 📸</h2>
+    <p class="photo-subtitle">A collection of my favorite moments with you</p>
+  </div>
+
+  <div class="photo-scroll-container">
+  <div class="photo-grid">
+    <div class="photo-card">
+      <img src="Images/photo1.jpg" alt="Memory 1">
+      <div class="photo-caption">Photoshoot 📸</div>
+    </div>
+
+    <div class="photo-card">
+      <img src="Images/photo2.jpg" alt="Memory 2">
+      <div class="photo-caption">When Aanya said I mog you (lies)</div>
+    </div>
+
+    <div class="photo-card">
+      <img src="Images/photo3.jpg" alt="Memory 3">
+      <div class="photo-caption">Pink pink</div>
+    </div>
+
+    <div class="photo-card">
+      <img src="Images/photo4.jpg" alt="Memory 4">
+      <div class="photo-caption">One year ♥️</div>
+    </div>
+
+    <div class="photo-card">
+      <img src="Images/photo5.jpg" alt="Memory 5">
+      <div class="photo-caption">My handsome boy</div>
+    </div>
+
+    <div class="photo-card">
+      <img src="Images/photo6.jpg" alt="Memory 6">
+      <div class="photo-caption">You chasing riti</div>
+    </div>
+
+     <div class="photo-card">
+      <img src="Images/photo7.JPG" alt="Memory 6">
+      <div class="photo-caption">Best day ever</div>
+    </div>
+
+     <div class="photo-card">
+      <img src="Images/photo8.JPG" alt="Memory 6">
+      <div class="photo-caption">Valentines 💘</div>
+    </div>
+
+     <div class="photo-card">
+      <img src="Images/photo9.JPG" alt="Memory 6">
+      <div class="photo-caption">Birthdayyy</div>
+    </div>
+
+    <!-- Add as many photo-card blocks as you'd like! -->
+  </div>
+</div>
+</div>
+
+<!-- Tab 3: Playlist / Songs & Memories -->
+<div class="tab-content" id="tab-2">
+  <div class="playlist-header">
+    <h2>Our Soundtrack 🎵</h2>
+    <p class="playlist-subtitle">The songs that remind me of our special moments</p>
+  </div>
+
+  <div class="playlist-scroll-container">
+    <div class="playlist-grid">
+
+      <!-- Track 1 -->
+      <div class="music-card">
+        <img src="Images/first_date.jpg" alt="Memory photo" class="music-img">
+        <div class="music-info">
+          <span class="music-tag">Parties</span>
+          <h3 class="song-title">Shut up and Dance</h3>
+          <p class="artist-name">The way you look at me when it says 'This woman is my destiny'</p>
+          <audio controls class="audio-player">
+            <source src="Audio/song1.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+      </div>
+
+      <!-- Track 2 -->
+      <div class="music-card">
+        <img src="Images/beach_day.jpg" alt="Memory photo" class="music-img">
+        <div class="music-info">
+          <span class="music-tag">India Club</span>
+          <h3 class="song-title">Raabta</h3>
+          <p class="artist-name">Your favourite bollywood song (its the only song you know) </p>
+          <audio controls class="audio-player">
+            <source src="Audio/song2.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+      </div>
+
+      <!-- Track 3 -->
+      <div class="music-card">
+        <img src="Images/road_trip.jpg" alt="Memory photo" class="music-img">
+        <div class="music-info">
+          <span class="music-tag">Daru</span>
+          <h3 class="song-title">Thodi si daru</h3>
+          <p class="artist-name">Drunk makeouts...</p>
+          <audio controls class="audio-player">
+            <source src="Audio/song3.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+  <script src="script.js"></script>
+</body>
+</html>
